@@ -1,0 +1,26 @@
+name: 'Divio Deployment'
+description: 'This action will handle the deployment process of your Divio project.'
+author: 'Juan Carlos Blanco Delgado <juancarlosjr97@gmail.com>'
+
+inputs:
+  BRANCH_LIVE:
+    description: 'Name of the branch to use on deployment of live environment.'
+    required: true
+    default: 'main'
+
+  BRANCH_TEST:
+    description: 'Name of the branch to use on deployment of test environment.'
+    required: true
+    default: 'staging'
+    
+outputs:
+  DEPLOYMENT_STATUS:
+    description: 'The status of the deployment that indicates if the run failed or passed. Possible outputs include: success|failed.'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.BRANCH_LIVE }}
+    - ${{ inputs.BRANCH_TEST }}
+
